@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
+import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
@@ -34,6 +35,9 @@ class BeerControllerTest {
 
     @MockBean
     BeerService beerService;
+
+//    @MockBean
+//    ConnectionFactoryInitializer connectionFactoryInitializer;
 
     BeerDto validBeer;
 
