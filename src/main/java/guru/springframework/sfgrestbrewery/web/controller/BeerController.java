@@ -59,7 +59,7 @@ public class BeerController {
             showInventoryOnHand = false;
         }
 
-        return ResponseEntity.ok(Mono.just(beerService.getById(beerId, showInventoryOnHand)));
+        return ResponseEntity.ok(beerService.getById(beerId, showInventoryOnHand));
     }
 
     @GetMapping("beerUpc/{upc}")
