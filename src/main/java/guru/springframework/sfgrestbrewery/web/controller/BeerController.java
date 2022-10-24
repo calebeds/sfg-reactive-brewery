@@ -53,7 +53,7 @@ public class BeerController {
     }
 
     @GetMapping("beer/{beerId}")
-    public ResponseEntity<Mono<BeerDto>> getBeerById(@PathVariable("beerId") UUID beerId,
+    public ResponseEntity<Mono<BeerDto>> getBeerById(@PathVariable("beerId") Integer beerId,
                                                     @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand){
         if (showInventoryOnHand == null) {
             showInventoryOnHand = false;
@@ -85,7 +85,7 @@ public class BeerController {
     }
 
     @DeleteMapping("beer/{beerId}")
-    public ResponseEntity<Void> deleteBeerById(@PathVariable("beerId") UUID beerId){
+    public ResponseEntity<Void> deleteBeerById(@PathVariable("beerId") Integer beerId){
 
         beerService.deleteBeerById(beerId);
 

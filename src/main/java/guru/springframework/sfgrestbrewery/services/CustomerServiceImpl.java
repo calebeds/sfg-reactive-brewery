@@ -4,6 +4,7 @@ import guru.springframework.sfgrestbrewery.web.model.CustomerDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -13,9 +14,9 @@ import java.util.UUID;
 @Service
 public class CustomerServiceImpl implements CustomerService {
     @Override
-    public CustomerDto getCustomerById(UUID customerId) {
+    public CustomerDto getCustomerById(Integer customerId) {
         return CustomerDto.builder()
-                .id(UUID.randomUUID())
+                .id(new Random().nextInt())
                 .name("Joe Buck")
                 .build();
     }
@@ -23,18 +24,18 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDto saveNewCustomer(CustomerDto customerDto) {
         return CustomerDto.builder()
-                .id(UUID.randomUUID())
+                .id(new Random().nextInt())
                 .build();
     }
 
     @Override
-    public void updateCustomer(UUID customerId, CustomerDto customerDto) {
+    public void updateCustomer(Integer customerId, CustomerDto customerDto) {
         //todo impl
         log.debug("Updating....");
     }
 
     @Override
-    public void deleteById(UUID customerId) {
+    public void deleteById(Integer customerId) {
         log.debug("Deleting.... ");
     }
 }
