@@ -47,6 +47,23 @@ public class BeerHandlerV2 {
                 }).switchIfEmpty(ServerResponse.notFound().build());
     }
 
+    public Mono<ServerResponse> updateBeer(ServerRequest request) {
+        return request.bodyToMono(BeerDto.class).doOnNext(this::validate)
+                .flatMap(beerDto -> {
+                    return beerService.updateBeer(Integer.valueOf(request.pathVariable("beerId")), beerDto);
+                }).flatMap(savedBeerDto -> {
+                    if(savedBeerDto.getId() != null) {
+                        log.debug("Saved Beer Id: {}", savedBeerDto.getId());
+                        return ServerResponse.noContent().build();
+                    }
+                    else{
+                        log.debug("Beer id {} Not Found", request.pathVariable("beerId"));
+                        return ServerResponse.notFound().build();
+                    }
+                });
+
+    }
+
     public Mono<ServerResponse> saveNewBeer(ServerRequest request) {
         Mono<BeerDto> beerDtoMono = request.bodyToMono(BeerDto.class).doOnNext(this::validate);
 
