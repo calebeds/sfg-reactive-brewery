@@ -12,10 +12,14 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 @Configuration
 public class BeerRouterConfig {
     public static final String BEER_V2_PATH = "/api/v2/beer/";
+    public static final String BEER_V2_PATH_UPC = "/api/v2/beerUpc/";
 
     @Bean
     public RouterFunction<ServerResponse> beerRoutesV2(BeerHandlerV2 handler) {
-        return route().GET(BEER_V2_PATH + "{beerId}", accept(APPLICATION_JSON),
-                handler::getBeerById).build();
+        return route()
+                .GET(BEER_V2_PATH + "{beerId}", accept(APPLICATION_JSON), handler::getBeerById)
+                .GET(BEER_V2_PATH_UPC + "{upc}",accept(APPLICATION_JSON), handler::getBeerByUPC)
+                .build();
     }
+
 }
