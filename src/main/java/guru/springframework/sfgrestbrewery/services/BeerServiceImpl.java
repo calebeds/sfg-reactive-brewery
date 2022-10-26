@@ -115,4 +115,18 @@ public class BeerServiceImpl implements BeerService {
     public void deleteBeerById(Integer beerId) {
         beerRepository.deleteById(beerId).subscribe();
     }
+
+    @Override
+    public Mono<Void> reactiveDeleteById(Integer beerId) {
+        return beerRepository
+                .findById(beerId)
+                .switchIfEmpty(Mono.error(new NotFoundException()))
+                .map(beer -> {
+                    return beer.getId();
+                })
+                .flatMap(beerRepository::deleteById);
+//        return beerRepository.deleteById(beerId);
+    }
+
+
 }
